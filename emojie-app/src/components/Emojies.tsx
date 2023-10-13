@@ -7,6 +7,8 @@ import Card from './UI/Card';
 const Emojies: React.FC = (props) => {
 
   const [emojies, setEmojies] = useState<{id: string, name: string, category: string, group: string, htmlCode: string, unicode: string}[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [httpError, SetHttpError] = useState();
 
   useEffect(() => {
     const fetchEmojies = async () => {
@@ -28,22 +30,33 @@ const Emojies: React.FC = (props) => {
         });
       }
       setEmojies(loadEmojies);
+      setLoading(false);
     };
+    fetchEmojies().catch((error) => {
+      setLoading(false);
+      SetHttpError(error.message);
+    })
   }, []);
 
-  const allemojies = emojies;
-  console.log(allemojies.map(emojie => console.log(emojie.name)));
   return <>
+   {emojies.map((emoji) => (
+        <Card key={emoji.id}>
+          <p>{emoji.name}</p>
+          <p>{emoji.category}</p>
+          <p>{emoji.group}</p>
+          <p>{emoji.htmlCode}</p>
+          <p>{emoji.unicode}</p>
+        </Card>
+   ))}
 
-   {allemojies.map(emoji =>{
-    <Card>
-    <p>{emoji.id}</p>
-    <p>{emoji.name}</p>
-    </Card>
-   })}
-
+   {loading &&  <section>
+        <p>Loading...</p>
+      </section>}
+    
+    {httpError && <section>
+        <p>{httpError}</p>
+      </section>}
   
   </>
 }
-
 export default Emojies;
