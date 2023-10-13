@@ -41,20 +41,26 @@ const Emojies: React.FC = (props) => {
   return <>
    {emojies.map((emoji) => (
         <Card key={emoji.id}>
-          <p>{emoji.name}</p>
-          <p>{emoji.category}</p>
-          <p>{emoji.group}</p>
-          <p>{emoji.htmlCode}</p>
-          <p>{emoji.unicode}</p>
+          <div className='card-header'>
+          <span className='card-name'>{emoji.name}</span>
+          </div>
+          <div className='card-image'>
+            <span>{emoji.unicode}</span>
+          </div>
+          <div className='card-footer'>
+          <p className='card-category'>{emoji.category}</p>
+          <p className='card-group'>{emoji.group}</p>
+          <p className='card-unicode'>{emoji.htmlCode}</p>
+          </div>
         </Card>
    ))}
 
    {loading &&  <section>
-        <p>Loading...</p>
+        <p className='loading-page'>Loading...</p>
       </section>}
     
     {httpError && <section>
-        <p>{httpError}</p>
+        <p className='error-page'>{httpError}</p>
       </section>}
   
   </>
