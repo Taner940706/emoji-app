@@ -10,6 +10,7 @@ const Emojies: React.FC = (props) => {
   const [emojies, setEmojies] = useState<{id: string, name: string, category: string, group: string, htmlCode: string, unicode: string}[]>([]);
   const [loading, setLoading] = useState(true);
   const [httpError, SetHttpError] = useState();
+  const [isFind, setIsFind] = useState(false);
 
   useEffect(() => {
     const fetchEmojies = async () => {
@@ -40,12 +41,16 @@ const Emojies: React.FC = (props) => {
   }, []);
 
   const handleSearch = (searchQuery: string) => {
-    console.log('Search query:', searchQuery);
-    
-    if (searchQuery.length !== 0){
-      const filteredResults = emojies.filter((emoji) =>
+    const filteredResults = emojies.filter((emoji) =>
       emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
+
+    if (filteredResults.length === 0){
+      setIsFind(true);
+    }
+     
+    if (searchQuery.length !== 0){
+      
       setEmojies(filteredResults);
     }
     else{
@@ -103,6 +108,10 @@ const Emojies: React.FC = (props) => {
     {httpError && <section>
         <p className='error-page'>{httpError}</p>
       </section>}
+
+      {isFind && <section className='empty-page'>
+        <h1>Result is empty!</h1>
+        </section>}
   
   </>
 }
