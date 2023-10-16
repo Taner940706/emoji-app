@@ -45,12 +45,12 @@ const Emojies: React.FC = (props) => {
           <span className='card-name'>{emoji.name}</span>
           </div>
           <div className='card-image'>
-            <span>{emoji.unicode}</span>
+          <span className='card-htmlcode' dangerouslySetInnerHTML={{ __html: emoji.htmlCode }}></span>
           </div>
           <div className='card-footer'>
           <p className='card-category'>{emoji.category}</p>
           <p className='card-group'>{emoji.group}</p>
-          <p className='card-unicode'>{emoji.htmlCode}</p>
+          <p className='card-unicode'>{emoji.unicode}</p>
           </div>
         </Card>
    ))}
