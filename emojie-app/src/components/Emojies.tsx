@@ -41,11 +41,41 @@ const Emojies: React.FC = (props) => {
 
   const handleSearch = (searchQuery: string) => {
     console.log('Search query:', searchQuery);
-    const filteredResults = emojies.filter((emoji) =>
+    
+    if (searchQuery.length !== 0){
+      const filteredResults = emojies.filter((emoji) =>
       emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    console.log('Filtered results:', filteredResults);
-    setEmojies(filteredResults);
+      setEmojies(filteredResults);
+    }
+    else{
+      const fetchEmojies = async () => {
+        const response = await fetch('https://emojihub.yurace.pro/api/all');
+        const responseData = await response.json();
+  
+        if (!response.ok){
+          throw new Error("Doesn't show available emojies!")
+        }
+        const loadEmojies = [];
+        for (const key in responseData){
+          loadEmojies.push({
+            id: key,
+            name: responseData[key].name,
+            category: responseData[key].category,
+            group: responseData[key].group,
+            htmlCode: responseData[key].htmlCode,
+            unicode: responseData[key].unicode, 
+          });
+        }
+        setEmojies(loadEmojies);
+        setLoading(false);
+      };
+      fetchEmojies().catch((error) => {
+        setLoading(false);
+        SetHttpError(error.message);
+      })
+    }
+    
   };
 
   return <>
