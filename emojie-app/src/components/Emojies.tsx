@@ -3,6 +3,7 @@ import 'react-dom';
 import classes from './Emojies.module.css';
 
 import Card from './UI/Card';
+import SearchBar from './UI/SearchBar';
 
 const Emojies: React.FC = (props) => {
 
@@ -38,7 +39,17 @@ const Emojies: React.FC = (props) => {
     })
   }, []);
 
+  const handleSearch = (searchQuery: string) => {
+    console.log('Search query:', searchQuery);
+    const filteredResults = emojies.filter((emoji) =>
+      emoji.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log('Filtered results:', filteredResults);
+    setEmojies(filteredResults);
+  };
+
   return <>
+  <SearchBar onSearch={handleSearch} />
    {emojies.map((emoji) => (
         <Card key={emoji.id}>
           <div className='card-header'>
