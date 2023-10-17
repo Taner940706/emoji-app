@@ -5,7 +5,7 @@ import classes from './Emojies.module.css';
 import Card from './UI/Card';
 import SearchBar from './UI/SearchBar';
 
-const Emojies: React.FC = (props) => {
+const Emojies: React.FC = () => {
 
   const [emojies, setEmojies] = useState<{id: string, name: string, category: string, group: string, htmlCode: string, unicode: string}[]>([]);
   const [loading, setLoading] = useState(true);
@@ -87,29 +87,29 @@ const Emojies: React.FC = (props) => {
   <SearchBar onSearch={handleSearch} />
    {emojies.map((emoji) => (
         <Card key={emoji.id}>
-          <div className='card-header'>
-          <span className='card-name'>{emoji.name}</span>
+          <div className={classes['card-header']}>
+          <span className={classes['card-name']}>{emoji.name}</span>
           </div>
-          <div className='card-image'>
-          <span className='card-htmlcode' dangerouslySetInnerHTML={{ __html: emoji.htmlCode }}></span>
+          <div className={classes['card-image']}>
+          <span className={classes['card-htmlcode']} dangerouslySetInnerHTML={{ __html: emoji.htmlCode }}></span>
           </div>
-          <div className='card-footer'>
-          <p className='card-category'>{emoji.category}</p>
-          <p className='card-group'>{emoji.group}</p>
-          <p className='card-unicode'>{emoji.unicode}</p>
+          <div className={classes['card-footer']}>
+          <p className={classes['card-category']}>{emoji.category}</p>
+          <p className={classes['card-group']}>{emoji.group}</p>
+          <p className={classes['card-unicode']}>{emoji.unicode}</p>
           </div>
         </Card>
    ))}
 
-   {loading &&  <section>
-        <p className='loading-page'>Loading...</p>
+   {loading &&  <section className={classes['loading-page']}>
+        <p>Loading...</p>
       </section>}
     
-    {httpError && <section>
-        <p className='error-page'>{httpError}</p>
+    {httpError && <section className={classes['error-page']}>
+        <p>{httpError}</p>
       </section>}
 
-      {isFind && <section className='empty-page'>
+      {isFind && <section className={classes['empty-page']}>
         <h1>Result is empty!</h1>
         </section>}
   

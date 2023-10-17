@@ -6,12 +6,6 @@ const SearchBar: React.FC<{onSearch: (searchQuery: string) => void}> = (props) =
   const searchText = useRef<HTMLInputElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearch = () => {
-    const searchTextValue = searchText.current!.value;
-    console.log('handleSearch called with:', searchText);
-    props.onSearch(searchTextValue);
-  };
-
   const onSubmitHandler = (event: FormEvent) => {
     event.preventDefault();
     props.onSearch(searchText.current!.value);
