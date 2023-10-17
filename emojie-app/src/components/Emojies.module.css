@@ -1,0 +1,13 @@
+.result{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: flex-end;
+    margin-top: 100px;
+}
+
+.loading-page, .empty-page, .error-page{
+    color: red;
+    text-align: center;
+    font-weight: bold;
+    font-size: 60px;
+}

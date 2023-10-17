@@ -1,3 +1,4 @@
+import { setFips } from 'crypto';
 import React, {useState, useEffect} from 'react';
 import 'react-dom';
 import classes from './Emojies.module.css';
@@ -33,6 +34,7 @@ const Emojies: React.FC = () => {
       }
       setEmojies(loadEmojies);
       setLoading(false);
+      setIsFind(true);
     };
     fetchEmojies().catch((error) => {
       setLoading(false);
@@ -46,7 +48,7 @@ const Emojies: React.FC = () => {
     );
 
     if (filteredResults.length === 0){
-      setIsFind(true);
+      setIsFind(false);
     }
      
     if (searchQuery.length !== 0){
@@ -85,7 +87,9 @@ const Emojies: React.FC = () => {
 
   return <>
   <SearchBar onSearch={handleSearch} />
+  <div className={classes.result}>
    {emojies.map((emoji) => (
+    
         <Card key={emoji.id}>
           <div className={classes['card-header']}>
           <span className={classes['card-name']}>{emoji.name}</span>
@@ -99,8 +103,9 @@ const Emojies: React.FC = () => {
           <p className={classes['card-unicode']}>{emoji.unicode}</p>
           </div>
         </Card>
+        
    ))}
-
+</div>
    {loading &&  <section className={classes['loading-page']}>
         <p>Loading...</p>
       </section>}
@@ -109,8 +114,8 @@ const Emojies: React.FC = () => {
         <p>{httpError}</p>
       </section>}
 
-      {isFind && <section className={classes['empty-page']}>
-        <h1>Result is empty!</h1>
+      {!isFind && <section className={classes['empty-page']}>
+        <p>Result not found!</p>
         </section>}
   
   </>
