@@ -55,6 +55,7 @@ const Emojies: React.FC = () => {
       
       setEmojies(filteredResults);
     }
+    
     else{
       const fetchEmojies = async () => {
         const response = await fetch('https://emojihub.yurace.pro/api/all');
@@ -76,6 +77,7 @@ const Emojies: React.FC = () => {
         }
         setEmojies(loadEmojies);
         setLoading(false);
+        setIsFind(true);
       };
       fetchEmojies().catch((error) => {
         setLoading(false);
@@ -92,15 +94,15 @@ const Emojies: React.FC = () => {
     
         <Card key={emoji.id}>
           <div className={classes['card-header']}>
-          <span className={classes['card-name']}>{emoji.name}</span>
+          <span className={classes['card-name']}>Name: {emoji.name}</span>
           </div>
           <div className={classes['card-image']}>
           <span className={classes['card-htmlcode']} dangerouslySetInnerHTML={{ __html: emoji.htmlCode }}></span>
           </div>
           <div className={classes['card-footer']}>
-          <p className={classes['card-category']}>{emoji.category}</p>
-          <p className={classes['card-group']}>{emoji.group}</p>
-          <p className={classes['card-unicode']}>{emoji.unicode}</p>
+          <p className={classes['card-category']}>Category: {emoji.category}</p>
+          <p className={classes['card-group']}>Group: {emoji.group}</p>
+          <p className={classes['card-unicode']}>Unicode: {emoji.unicode}</p>
           </div>
         </Card>
         

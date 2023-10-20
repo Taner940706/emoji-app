@@ -1,0 +1,20 @@
+.searchBar input{
+    border-right: none;
+    border-top: none;
+    border-left: none;
+    margin-right: 30px;
+    height: 40px;
+    width: 250px;
+    background-color: #f5f5dc;
+}
+.searchBar button{
+    background-color: #08415c;
+    width: 100px;
+    height: 40px;
+    color: #adcad6;
+    font-size: large;
+}
+
+.searchBar input:focus{
+    outline: none;
+}

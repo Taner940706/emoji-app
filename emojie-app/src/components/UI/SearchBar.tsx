@@ -14,7 +14,7 @@ const SearchBar: React.FC<{onSearch: (searchQuery: string) => void}> = (props) =
   }
   return <>
   <form className={classes.form} onSubmit={onSubmitHandler}>
-    <div className={classes.seachBar}>
+    <div className={classes.searchBar}>
       <input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} ref={searchText} />
       <button type='submit'>Search</button>
       </div>

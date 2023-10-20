@@ -1,8 +1,9 @@
 .result{
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
     align-items: flex-end;
     margin-top: 100px;
+    margin-left: 15px;
 }
 
 .loading-page, .empty-page, .error-page{
@@ -10,4 +11,8 @@
     text-align: center;
     font-weight: bold;
     font-size: 60px;
+}
+
+.card-category, .card-group, .card-unicode, .card-name{
+    color: #adcad6;
 }
