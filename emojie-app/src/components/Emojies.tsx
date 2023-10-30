@@ -1,4 +1,3 @@
-import { setFips } from 'crypto';
 import React, {useState, useEffect} from 'react';
 import 'react-dom';
 import classes from './Emojies.module.css';
@@ -12,6 +11,7 @@ const Emojies: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [httpError, SetHttpError] = useState();
   const [isFind, setIsFind] = useState(false);
+  
 
   useEffect(() => {
     const fetchEmojies = async () => {

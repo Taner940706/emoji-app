@@ -15,6 +15,10 @@
     font-size: large;
 }
 
+.searchBar button:hover{
+    background-color: #46addd;
+}
+
 .searchBar input:focus{
     outline: none;
 }
