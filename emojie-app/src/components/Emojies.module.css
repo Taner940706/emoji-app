@@ -6,7 +6,7 @@
     margin-left: 15px;
 }
 
-.loading-page, .empty-page, .error-page{
+.loading-page p, .empty-page p, .error-page p{
     color: red;
     text-align: center;
     font-weight: bold;
