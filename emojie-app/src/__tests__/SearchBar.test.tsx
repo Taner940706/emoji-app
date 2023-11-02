@@ -13,9 +13,19 @@ const form = screen.getByTestId('search-form');
 const button = screen.getByRole('button');
 const input = screen.getByDisplayValue('');
 
+const buttonStyle = window.getComputedStyle(button);
+const inputStyle = window.getComputedStyle(input);
+
+
 expect(form).toBeInTheDocument();
 expect(button).toBeInTheDocument();
 expect(input).toBeInTheDocument();
+expect(inputStyle.backgroundColor).toBe('white');
+expect(buttonStyle.color).toBe('ButtonText');
+
+userEvent.hover(button);
+expect(buttonStyle.backgroundColor).toBe('ButtonFace');
+
 
 });
 
