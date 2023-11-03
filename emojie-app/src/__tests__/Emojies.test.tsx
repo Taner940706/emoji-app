@@ -1,6 +1,7 @@
-// import {screen, waitFor, render} from '@testing-library/react';
+import {screen, waitFor, render, fireEvent} from '@testing-library/react';
 
-// import Emojies from '../components/Emojies';
+import Emojies from '../components/Emojies';
+import Card from '../components/UI/Card';
 
 
 
@@ -59,3 +60,39 @@
 //     });
 //   });
 // })
+
+describe("Integration tests when Emojies and SearchBar interact with each other", () => {
+    test("if searched emoji is found and not found", async () => {
+        render(<Emojies />);
+
+  // Simulate user input by typing into the search bar
+  const searchInput = screen.getByPlaceholderText('Search');
+  fireEvent.change(searchInput, { target: { value: 'banana' } });
+
+  // Submit the search form
+  const searchForm = screen.getByTestId('search-form');
+  fireEvent.submit(searchForm);
+
+  // Wait for the results to update (you can use waitFor if async operations are involved)
+
+    const nameCard = await screen.findByText('Name: banana');
+
+
+  // Verify that the result is displayed
+  expect(nameCard).not.toBeNull();
+  expect(screen.queryByText('Result not found!')).toBeNull(); // No "Result not found" message
+
+  // Now let's simulate a search that should return no results
+  fireEvent.change(searchInput, { target: { value: 'nonexistent' } });
+  fireEvent.submit(searchForm);
+
+  // Wait for the "Result not found" message to appear
+  await screen.findByText('Result not found!');
+
+  // Verify that the "Result not found" message is displayed
+  expect(screen.getByText('Result not found!')).toBeInTheDocument();
+  expect(screen.queryByText('Name:')).toBeNull(); // No results should be displayed
+
+        
+    });
+});
